@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using VendedoresMVC.Models;
 using VendedoresMVC.Models.ViewModels;
 using VendedoresMVC.Services;
@@ -45,13 +47,13 @@ namespace VendedoresMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new {message = "Id not provided"});
             }
 
             var obj = _sellerService.FindById(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new {message = "Id not found"});
             }
 
             return View(obj);
@@ -69,13 +71,13 @@ namespace VendedoresMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new {message = "Id not provied"});
             }
 
             var obj = _sellerService.FindById(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new {message = "Id not found"});
             }
 
             return View(obj);
@@ -85,13 +87,13 @@ namespace VendedoresMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new {message = "Id not provied"});
             }
 
             var obj = _sellerService.FindById(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new {message = "Id not found"});
             }
 
             List<Department> departments = _departamentService.FindAll();
@@ -104,7 +106,7 @@ namespace VendedoresMVC.Controllers
         {
             if (id != seller.Id)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new {message = "Id mismatch"});
             }
 
             try
@@ -112,16 +114,24 @@ namespace VendedoresMVC.Controllers
                 _sellerService.Update(seller);
                 return RedirectToAction(nameof(Index));
             }
-            catch (NotFoundException e)
+            catch (ApplicationException e)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new {message = e});
             }
-            catch (DbConcurrencyException e)
-            {
-                return BadRequest();
-            }
-            
         }
 
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
+
+
+        }
+        
+        
     }
 }
