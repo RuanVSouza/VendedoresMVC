@@ -19,7 +19,7 @@ namespace VendedoresMVC.Controllers
             _sellerService = sellerService;
             _departamentService = departamentService;
         }
-        
+
         public IActionResult Index()
         {
             var list = _sellerService.FindAll();
@@ -38,6 +38,31 @@ namespace VendedoresMVC.Controllers
         {
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
-        } 
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _sellerService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _sellerService.Remove(id);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
