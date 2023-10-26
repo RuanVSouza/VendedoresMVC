@@ -15,12 +15,12 @@ namespace VendedoresMVC.Controllers
     public class SellersController : Controller
     {
         private readonly SellerService _sellerService;
-        private readonly DepartamentService _departamentService;
+        private readonly DepartmentService _departamentService;
 
-        public SellersController(SellerService sellerService, DepartamentService departamentService)
+        public SellersController(SellerService sellerService, DepartmentService departmentService)
         {
             _sellerService = sellerService;
-            _departamentService = departamentService;
+            _departamentService = departmentService;
         }
 
         public IActionResult Index()

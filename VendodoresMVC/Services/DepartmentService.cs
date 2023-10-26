@@ -3,11 +3,11 @@ using VendedoresMVC.Models;
 
 namespace VendedoresMVC.Services;
 
-public class DepartamentService
+public class DepartmentService
 {
     private readonly VendedoresMVCContext _context;
 
-    public DepartamentService(VendedoresMVCContext context)
+    public DepartmentService(VendedoresMVCContext context)
     {
         _context = context;
     }

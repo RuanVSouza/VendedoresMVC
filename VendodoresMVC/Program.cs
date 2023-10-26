@@ -22,7 +22,7 @@ builder.Services.AddDbContext<VendedoresMVCContext>(options => options.UseMySql(
 
 builder.Services.AddScoped<SeedingService>();
 builder.Services.AddScoped<SellerService>();
-builder.Services.AddScoped<DepartamentService>();
+builder.Services.AddScoped<DepartmentService>();
 
 var app = builder.Build();
 app.UseRequestLocalization(localizationOptions);
