@@ -1,20 +1,25 @@
+using VendedoresMVC.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using VendedoresMVC.Data;
 using VendedoresMVC.Models;
 
-namespace VendedoresMVC.Services;
-
-public class DepartmentService
+namespace VendedoresMVC.Services
 {
-    private readonly VendedoresMVCContext _context;
-
-    public DepartmentService(VendedoresMVCContext context)
+    public class DepartmentService
     {
-        _context = context;
-    }
+        private readonly VendedoresMVCContext _context;
 
-    public List<Department> FindAll()
-    {
-        return _context.Department.OrderBy(x => x.Name).ToList();
+        public DepartmentService(VendedoresMVCContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<List<Department>> FindAllAsync()
+        {
+            return await _context.Department.OrderBy(x => x.Name).ToListAsync();
+        }
     }
-    
 }
