@@ -1,14 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace VendedoresMVC.Models
 {
     public class Department
     {
-        [Key]
         public int Id { get; set; }
         public string  Name { get; set; }
         public ICollection<Seller> Sellers { get; set; } = new List<Seller>();
+        
         
         public Department(){}
         public Department(int id, string name)

@@ -24,11 +24,20 @@
     <Compile Remove="Migrations\VendedoresMVCContextModelSnapshot.cs" />
     <Compile Remove="Migrations\20230809003853_Initial.cs" />
     <Compile Remove="Migrations\20230809003853_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20231020101924_OtherEntities.cs" />
+    <Compile Remove="Migrations\20231020101924_OtherEntities.Designer.cs" />
+    <Compile Remove="Migrations\20231023130232_DepartmentForeignKey.cs" />
+    <Compile Remove="Migrations\20231023130232_DepartmentForeignKey.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Views\SalesRecords\" />
     <Folder Include="Views\Sellers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\SalesRecord" />
   </ItemGroup>
 
 
